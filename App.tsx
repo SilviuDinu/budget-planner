@@ -1,38 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import InputField from './components/InputField';
+import moment, { Moment } from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text } from 'react-native';
+import InputField from './components/InputField/InputField';
+import { ContainerView, MainView, StyledScrollView } from './styles';
+import { getAmountPerDay } from './utils/utils';
 
 export default function App() {
   const [budgetAmount, setBudgetAmount] = useState<string>('');
+  const [amountPerDay, setAmountPerDay] = useState<any>('');
+  const currentMoment = useRef<Moment>(moment());
 
   useEffect(() => {
-    console.log(budgetAmount);
-  });
+    const amount = getAmountPerDay(budgetAmount, currentMoment.current);
+    setAmountPerDay(amount);
+  }, [budgetAmount]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <InputField
-          value={budgetAmount}
-          onChangeValue={setBudgetAmount}
-          keyboardType={'numeric'}
-        />
-      </View>
+    <ContainerView>
+      <StyledScrollView keyboardShouldPersistTaps="never">
+        <MainView>
+          <InputField
+            value={budgetAmount}
+            onChangeValue={setBudgetAmount}
+            keyboardType={'numeric'}
+          />
+          {!!amountPerDay && (
+            <>
+              <Text style={{ marginTop: 32 }}>
+                Amount to spend per day: {amountPerDay}
+              </Text>
+            </>
+          )}
+        </MainView>
+      </StyledScrollView>
       <StatusBar style="auto" />
-    </View>
+    </ContainerView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightgray',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  main: {
-    flex: 1,
-    width: '100%',
-  }
-});
