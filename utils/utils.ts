@@ -7,6 +7,9 @@ export const getAmountPerDay = (
   time: Moment,
   options?: any
 ): number => {
+  if (!time || !total) {
+    return 0;
+  }
   const { excludeWeekends = false } = options || {};
   const totalDays = excludeWeekends
     ? getBusinessDays(time)
@@ -15,6 +18,9 @@ export const getAmountPerDay = (
 };
 
 export const getBusinessDays = (time: Moment): number => {
+  if (!time) {
+    return 0;
+  }
   const totalDays = time.daysInMonth();
   const currentDay = moment(time);
   let businessDays = totalDays;

@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import moment, { Moment } from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
+import CalendarView from './components/CalendarView/CalendarView';
 import InputField from './components/InputField/InputField';
 import { ContainerView, MainView, StyledScrollView } from './styles';
 import { getAmountPerDay } from './utils/utils';
@@ -32,6 +33,7 @@ export default function App() {
               </Text>
             </>
           )}
+          <CalendarView></CalendarView>
         </MainView>
       </StyledScrollView>
       <StatusBar style="auto" />
