@@ -6,7 +6,6 @@ import {
   CalendarBodyText,
   CalendarHeadText,
   CenteredView,
-  ColumnLayoutView,
   RowLayoutView,
 } from './styles';
 
@@ -14,10 +13,10 @@ export default React.memo(function CalendarView(props: any) {
   const { dates, markedDates, amountPerDay } = props || {};
 
   const getCorrespondingDays = (weekday?: string): string[] => {
-    const now = moment('2020-01-15');
+    const now = moment();
     const totalDaysInMonth = now.daysInMonth();
     const firstDayOfMonthIndex = now.startOf('month').weekday();
-    // console.log(now.startOf('month').day(5).format('LL'));
+    const lastDayOfMonthIndex = now.endOf('month').weekday();
     let dates = [];
     for (let i = 0; i < totalDaysInMonth; i++) {
       dates.push(
@@ -30,15 +29,18 @@ export default React.memo(function CalendarView(props: any) {
     for (let i = 0; i < firstDayOfMonthIndex - 1; i++) {
       dates.unshift('');
     }
+    for (let i = 0; i < lastDayOfMonthIndex - 1; i++) {
+      dates.push('');
+    }
     return dates;
   };
 
   return (
-    <CenteredView>
-      <CenteredView style={{ marginTop: 64 }}>
+    <CenteredView style={{marginTop: 64}}>
+      <CenteredView>
         <CenteredView column wrap>
           <RowLayoutView>
-            <CenteredView>
+            <CenteredView wrap>
               {weekdays.map((weekday: string, index: number) => (
                 <CalendarHeadText key={index}>
                   {weekday?.substring(0, 3)}

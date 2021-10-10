@@ -33,7 +33,7 @@ export default function App() {
               </Text>
             </>
           )}
-          <CalendarView></CalendarView>
+          <CalendarView />
         </MainView>
       </StyledScrollView>
       <StatusBar style="auto" />

@@ -33,28 +33,30 @@ export const RowLayoutView = styled(View)`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  padding: 8px;
-  margin: 8px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ColumnLayoutView = styled(View)`
   flex: 1;
   flex-direction: column;
-  width: 100%;
-  padding: 8px;
-  margin: 8px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CalendarHeadText = styled(Text)`
-  margin-right: 8px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   flex: 1;
 `;
 
 export const CalendarBodyText = styled(Text)`
   font-size: 18px;
-  margin-top: 16px;
+  margin-top: 32px;
   flex: 1 0 14%; /* explanation below */
-  flex-grow: 1;
-  width: 100%;
+  text-align: center;
 `;
